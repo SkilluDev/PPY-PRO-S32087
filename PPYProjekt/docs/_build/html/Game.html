@@ -38,15 +38,30 @@
 <dt class="sig sig-object py" id="Game.Cell">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Game.</span></span><span class="sig-name descname"><span class="pre">Cell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Game.Cell" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class representing the logical cell</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="Game.Cell.flip_state">
 <span class="sig-name descname"><span class="pre">flip_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Game.Cell.flip_state" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Flip the current state of the cell</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Game.Cell.next_state">
+<span class="sig-name descname"><span class="pre">next_state</span></span><a class="headerlink" href="#Game.Cell.next_state" title="Link to this definition">¶</a></dt>
+<dd><p>The next state of the cell</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Game.Cell.state">
+<span class="sig-name descname"><span class="pre">state</span></span><a class="headerlink" href="#Game.Cell.state" title="Link to this definition">¶</a></dt>
+<dd><p>The current state of the cell</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="Game.Cell.update_to_next_state">
 <span class="sig-name descname"><span class="pre">update_to_next_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Game.Cell.update_to_next_state" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Set the current state of the cell to the next state</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -54,35 +69,60 @@
 <dt class="sig sig-object py" id="Game.GameUI">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Game.</span></span><span class="sig-name descname"><span class="pre">GameUI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">400</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">400</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Game.GameUI" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>UI element for the main game</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="Game.GameUI.draw_grid">
 <span class="sig-name descname"><span class="pre">draw_grid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Game.GameUI.draw_grid" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Update the UI grid of the game</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Game.GameUI.grid">
+<span class="sig-name descname"><span class="pre">grid</span></span><a class="headerlink" href="#Game.GameUI.grid" title="Link to this definition">¶</a></dt>
+<dd><p>The Grid() for logic operations</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Game.GameUI.height">
+<span class="sig-name descname"><span class="pre">height</span></span><a class="headerlink" href="#Game.GameUI.height" title="Link to this definition">¶</a></dt>
+<dd><p>Height of the window</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="Game.GameUI.stop_game">
 <span class="sig-name descname"><span class="pre">stop_game</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Game.GameUI.stop_game" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Cancel the main game loop</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="Game.GameUI.toggle_game">
 <span class="sig-name descname"><span class="pre">toggle_game</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Game.GameUI.toggle_game" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Toggle the game on and off</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="Game.GameUI.update_game">
 <span class="sig-name descname"><span class="pre">update_game</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Game.GameUI.update_game" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Calculate the logic for next tick and update the UI in a loop</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="Game.GameUI.update_grid">
 <span class="sig-name descname"><span class="pre">update_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Game.GameUI.update_grid" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Handle the click event - Flip the cell state when it’s pressed - Update the UI</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="Game.GameUI.update_speed">
 <span class="sig-name descname"><span class="pre">update_speed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Game.GameUI.update_speed" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Update the speed of the in-game tick</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Game.GameUI.width">
+<span class="sig-name descname"><span class="pre">width</span></span><a class="headerlink" href="#Game.GameUI.width" title="Link to this definition">¶</a></dt>
+<dd><p>Width of the window</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -90,35 +130,60 @@
 <dt class="sig sig-object py" id="Game.Grid">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Game.</span></span><span class="sig-name descname"><span class="pre">Grid</span></span><a class="headerlink" href="#Game.Grid" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class representing the logical grid of cells</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="Game.Grid.calculate_next_state">
 <span class="sig-name descname"><span class="pre">calculate_next_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Game.Grid.calculate_next_state" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Calculate the next state for the cell at [x][y]</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="Game.Grid.calculate_next_states">
 <span class="sig-name descname"><span class="pre">calculate_next_states</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Game.Grid.calculate_next_states" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Calculate the next state for all cells</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Game.Grid.cells">
+<span class="sig-name descname"><span class="pre">cells</span></span><a class="headerlink" href="#Game.Grid.cells" title="Link to this definition">¶</a></dt>
+<dd><p>The 2D array of cells</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Game.Grid.columns">
+<span class="sig-name descname"><span class="pre">columns</span></span><a class="headerlink" href="#Game.Grid.columns" title="Link to this definition">¶</a></dt>
+<dd><p>The amount of the columns in the grid</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="Game.Grid.make_glider">
 <span class="sig-name descname"><span class="pre">make_glider</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Game.Grid.make_glider" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Create a glider pattern with top left corner at [x][y]</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="Game.Grid.prepare_empty_grid">
 <span class="sig-name descname"><span class="pre">prepare_empty_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Game.Grid.prepare_empty_grid" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Prepare an empty grid with the size of rows x columns</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Game.Grid.rows">
+<span class="sig-name descname"><span class="pre">rows</span></span><a class="headerlink" href="#Game.Grid.rows" title="Link to this definition">¶</a></dt>
+<dd><p>The amount of the rows in the grid</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="Game.Grid.set_cell">
 <span class="sig-name descname"><span class="pre">set_cell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Game.Grid.set_cell" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Set a cell at [x][y] to a certain state</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="Game.Grid.update_to_next_state">
 <span class="sig-name descname"><span class="pre">update_to_next_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Game.Grid.update_to_next_state" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Update all cells to their next state</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -126,22 +191,32 @@
 <dt class="sig sig-object py" id="Game.SettingsUI">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Game.</span></span><span class="sig-name descname"><span class="pre">SettingsUI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">on_generate</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Game.SettingsUI" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>UI element for configuration of the game</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="Game.SettingsUI.generate">
 <span class="sig-name descname"><span class="pre">generate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Game.SettingsUI.generate" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Set the configuration of the game and run on_generate() with the config</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Game.SettingsUI.on_generate">
+<span class="sig-name descname"><span class="pre">on_generate</span></span><a class="headerlink" href="#Game.SettingsUI.on_generate" title="Link to this definition">¶</a></dt>
+<dd><p>The method to call when you press the generate button</p>
+</dd></dl>
 
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="Game.main">
 <span class="sig-prename descclassname"><span class="pre">Game.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Game.main" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Run the program - Start with settings</p>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="Game.start_game">
 <span class="sig-prename descclassname"><span class="pre">Game.</span></span><span class="sig-name descname"><span class="pre">start_game</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cell_size</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Game.start_game" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Start a new game with the config (rows, columns, cell_size)</p>
+</dd></dl>
 
 </section>
 
