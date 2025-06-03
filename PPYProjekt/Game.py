@@ -1,5 +1,4 @@
-from time import sleep
-
+import tkinter as tk
 
 class Grid:
     def __init__(self):
@@ -91,21 +90,78 @@ class Cell:
         self.state = state
         self.next_state = 0
 
+    def flip_state(self):
+        self.state = 1 if self.state == 0 else 0
     def update_to_next_state(self):
         self.state = self.next_state
+
+
+
+class GameUI:
+    def __init__(self, root, grid, width=400, height=400):
+        self.width = width
+        self.height = height
+        self.cell_width = width/grid.columns
+        self.cell_height = height/grid.rows
+        self.root = root
+        self.grid = grid
+        self.canvas = tk.Canvas(self.root, width=self.width, height=self.height)
+        self.canvas.pack()
+
+        self.button = tk.Button(self.root, text="Start", command=self.start_game)
+        self.button.pack()
+
+        self.speed = 1000
+
+        self.speed_slider = tk.Scale(self.root, from_=0.2, to=5, resolution=0.1,
+                                     orient=tk.HORIZONTAL, label="Update time")
+        self.speed_slider.set(self.speed/1000)
+        self.speed_slider.pack()
+
+        self.canvas.bind("<ButtonRelease-1>", self.update_grid)
+        self.speed_slider.bind("<ButtonRelease-1>", self.update_speed)
+
+        self.draw_grid()
+
+    def update_speed(self, event):
+        self.speed = self.speed_slider.get()*1000
+
+    def update_grid(self, event):
+        j = int(event.x // self.cell_width)
+        i = int(event.y // self.cell_height)
+        self.grid.cells[i][j].flip_state()
+        self.draw_grid()
+
+    def draw_grid(self):
+        for i in range(self.grid.rows):
+            for j in range(self.grid.columns):
+                color = "black" if self.grid.cells[i][j].state == 1 else "white"
+                x = j * self.cell_width
+                y = i * self.cell_height
+                self.canvas.create_rectangle(x, y, x+self.cell_width, y+self.cell_height, fill=color)
+
+    def start_game(self):
+        self.button.destroy()
+        self.update_game()
+
+    def update_game(self):
+        self.grid.calculate_next_states()
+        self.grid.update_to_next_state()
+        self.draw_grid()
+        self.root.after(int(self.speed), self.update_game)
+
 
 def main():
     grid = Grid()
     grid.prepare_empty_grid(10,10)
     grid.make_glider(0,0)
     print(grid)
-    for i in range(30):
-        grid.calculate_next_states()
-        grid.update_to_next_state()
-        print(grid)
-        sleep(1)
-
+    root = tk.Tk()
+    root.title("Game of Life")
+    GameUI(root, grid, 200, 200)
+    root.mainloop()
     return
+
 
 if __name__ == '__main__':
     main()
