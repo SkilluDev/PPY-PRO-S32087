@@ -96,9 +96,44 @@ class Cell:
         self.state = self.next_state
 
 
+class SettingsUI:
+    def __init__(self, root, on_generate):
+        self.root = root
+        self.on_generate = on_generate
+        self.frame = tk.Frame(root)
+        self.frame.pack()
+
+        tk.Label(self.frame, text="Rows:").grid(row=0, column=0)
+        self.rows_entry = tk.Entry(self.frame)
+        self.rows_entry.insert(0, "10")
+        self.rows_entry.grid(row=0, column=1)
+
+        tk.Label(self.frame, text="Columns:").grid(row=1, column=0)
+        self.columns_entry = tk.Entry(self.frame)
+        self.columns_entry.insert(0, "10")
+        self.columns_entry.grid(row=1, column=1)
+
+        tk.Label(self.frame, text="Cell size:").grid(row=2, column=0)
+        self.cell_size_entry = tk.Entry(self.frame)
+        self.cell_size_entry.insert(0, "20")
+        self.cell_size_entry.grid(row=2, column=1)
+
+        self.button = tk.Button(self.frame, text="Generate", command=self.generate)
+        self.button.grid(row=3, column=1)
+
+    def generate(self):
+        rows = int(self.rows_entry.get())
+        columns = int(self.columns_entry.get())
+        cell_size = int(self.cell_size_entry.get())
+        self.frame.destroy()
+        self.on_generate(self.root, rows, columns, cell_size)
+
+
 
 class GameUI:
     def __init__(self, root, grid, width=400, height=400):
+        self.after_id = -1
+        self.is_running = False
         self.width = width
         self.height = height
         self.cell_width = width/grid.columns
@@ -108,7 +143,7 @@ class GameUI:
         self.canvas = tk.Canvas(self.root, width=self.width, height=self.height)
         self.canvas.pack()
 
-        self.button = tk.Button(self.root, text="Start", command=self.start_game)
+        self.button = tk.Button(self.root, text="Start", command=self.toggle_game)
         self.button.pack()
 
         self.speed = 1000
@@ -127,12 +162,14 @@ class GameUI:
         self.speed = self.speed_slider.get()*1000
 
     def update_grid(self, event):
+        if self.is_running: return
         j = int(event.x // self.cell_width)
         i = int(event.y // self.cell_height)
         self.grid.cells[i][j].flip_state()
         self.draw_grid()
 
     def draw_grid(self):
+        self.canvas.delete("all")
         for i in range(self.grid.rows):
             for j in range(self.grid.columns):
                 color = "black" if self.grid.cells[i][j].state == 1 else "white"
@@ -140,27 +177,41 @@ class GameUI:
                 y = i * self.cell_height
                 self.canvas.create_rectangle(x, y, x+self.cell_width, y+self.cell_height, fill=color)
 
-    def start_game(self):
-        self.button.destroy()
-        self.update_game()
+    def toggle_game(self):
+        self.is_running = not self.is_running
+        if self.is_running:
+            self.button.config(text="Stop")
+            self.update_game()
+        else:
+            self.button.config(text="Start")
+            self.stop_game()
 
     def update_game(self):
         self.grid.calculate_next_states()
         self.grid.update_to_next_state()
         self.draw_grid()
-        self.root.after(int(self.speed), self.update_game)
+        self.after_id = self.root.after(int(self.speed), self.update_game)
 
+    def stop_game(self):
+        self.root.after_cancel(self.after_id)
+
+def start_game(root, rows, columns, cell_size):
+    grid = Grid()
+    grid.prepare_empty_grid(rows, columns)
+    grid.make_glider(0, 0)
+    GameUI(root, grid, cell_size*columns, cell_size*rows)
 
 def main():
     grid = Grid()
     grid.prepare_empty_grid(10,10)
     grid.make_glider(0,0)
-    print(grid)
+    #print(grid)
     root = tk.Tk()
     root.title("Game of Life")
-    GameUI(root, grid, 200, 200)
+    SettingsUI(root, start_game)
     root.mainloop()
     return
+
 
 
 if __name__ == '__main__':
